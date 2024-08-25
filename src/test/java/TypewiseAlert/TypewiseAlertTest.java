@@ -2,7 +2,6 @@ package TypewiseAlert;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 import TypewiseAlert.cooler.*;
 import TypewiseAlert.transmitter.*;
 
@@ -21,7 +20,7 @@ public class TypewiseAlertTest {
     @Test
     public void checkAndAlertForNormalTemperature() {
         MockAlertTarget alertTarget = new MockAlertTarget();
-        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");        
+        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");       
         TypewiseAlert.checkAndAlert(alertTarget, batteryChar, 25);
         assertNull(alertTarget.lastAlertSent);
     }
@@ -29,7 +28,7 @@ public class TypewiseAlertTest {
     @Test
     public void checkAndAlertForLowTemperature() {
         MockAlertTarget alertTarget = new MockAlertTarget();
-        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");     
+        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");       
         TypewiseAlert.checkAndAlert(alertTarget, batteryChar, -1);
         assertEquals(BreachType.TOO_LOW, alertTarget.lastAlertSent);
     }
@@ -37,7 +36,8 @@ public class TypewiseAlertTest {
     @Test
     public void checkAndAlertForHighTemperature() {
         MockAlertTarget alertTarget = new MockAlertTarget();
-        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");     
+        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");
+        
         TypewiseAlert.checkAndAlert(alertTarget, batteryChar, 36);
         assertEquals(BreachType.TOO_HIGH, alertTarget.lastAlertSent);
     }
