@@ -41,4 +41,4 @@ Think about guiding refactoring-work in your regular/project teams. Think of the
 You have seen a few workflows in this repository. They are quality-gates to prevent duplication, control complexity and prove functionality. Do you think some of them have potential to guide code-improvements in your team? **yes**
 
 During the next four weeks, what improvement do you plan in your code-quality practice? (in your regular work, not in this repository!)
-**I am going to focus on implementing dependency inversion principle reduce the dependency for higher module from lower module. My understanding from this TCQ program is Don't over engineer the solution. Do what is required. Make a bug free product which should also be easy to read, add new feature and maintain **
+I am going to focus on implementing dependency inversion principle reduce the dependency for higher module from lower module. My understanding from this TCQ program is Don't over engineer the solution. Do what is required. Make a bug free product which should also be easy to read, add new feature and maintain
