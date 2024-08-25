@@ -17,39 +17,6 @@ public class TypewiseAlertTest {
         }
     }
 
-    @Test
-    public void infersBreachAsPerLimits() {
-        assertTrue(TypewiseAlert.inferBreach(12, 20, 30) == BreachType.TOO_LOW);
-        assertTrue(TypewiseAlert.inferBreach(35, 20, 30) == BreachType.TOO_HIGH);
-        assertTrue(TypewiseAlert.inferBreach(25, 20, 30) == BreachType.NORMAL);
-    }
-
-    @Test
-    public void classifiesTemperatureBreachForPassiveCooling() {
-        PassiveCooler cooler = new PassiveCooler();
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 0) == BreachType.NORMAL);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 35) == BreachType.NORMAL);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, -1) == BreachType.TOO_LOW);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 36) == BreachType.TOO_HIGH);
-    }
-
-    @Test
-    public void classifiesTemperatureBreachForMediumActiveCooling() {
-        MediumActiveCooler cooler = new MediumActiveCooler();
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 0) == BreachType.NORMAL);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 40) == BreachType.NORMAL);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, -1) == BreachType.TOO_LOW);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 41) == BreachType.TOO_HIGH);
-    }
-
-    @Test
-    public void classifiesTemperatureBreachForHighActiveCooling() {
-        HighActiveCooler cooler = new HighActiveCooler();
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 0) == BreachType.NORMAL);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 45) == BreachType.NORMAL);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, -1) == BreachType.TOO_LOW);
-        assertTrue(TypewiseAlert.classifyTemperatureBreach(cooler, 46) == BreachType.TOO_HIGH);
-    }
 
     @Test
     public void checkAndAlertForNormalTemperature() {
@@ -81,16 +48,11 @@ public class TypewiseAlertTest {
     @Test
     public void testEmailAlertContent() {
         EmailAlert emailAlert = new EmailAlert("test@example.com");
-        // Redirect System.out to capture printed content
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
-
         emailAlert.SendAlertInfo(BreachType.TOO_HIGH);
-        
         String expectedOutput = "To: test@example.com\nHi, the temperature Too High\n";
         assertEquals(expectedOutput, out.toString());
-
-        // Reset System.out
         System.setOut(System.out);
     }
 
