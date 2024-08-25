@@ -21,8 +21,7 @@ public class TypewiseAlertTest {
     @Test
     public void checkAndAlertForNormalTemperature() {
         MockAlertTarget alertTarget = new MockAlertTarget();
-        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");
-        
+        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");        
         TypewiseAlert.checkAndAlert(alertTarget, batteryChar, 25);
         assertNull(alertTarget.lastAlertSent);
     }
@@ -30,8 +29,7 @@ public class TypewiseAlertTest {
     @Test
     public void checkAndAlertForLowTemperature() {
         MockAlertTarget alertTarget = new MockAlertTarget();
-        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");
-        
+        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");     
         TypewiseAlert.checkAndAlert(alertTarget, batteryChar, -1);
         assertEquals(BreachType.TOO_LOW, alertTarget.lastAlertSent);
     }
@@ -39,8 +37,7 @@ public class TypewiseAlertTest {
     @Test
     public void checkAndAlertForHighTemperature() {
         MockAlertTarget alertTarget = new MockAlertTarget();
-        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");
-        
+        BatteryCharacter batteryChar = new BatteryCharacter(new PassiveCooler(), "TestBrand");     
         TypewiseAlert.checkAndAlert(alertTarget, batteryChar, 36);
         assertEquals(BreachType.TOO_HIGH, alertTarget.lastAlertSent);
     }
@@ -61,12 +58,9 @@ public class TypewiseAlertTest {
         ControllerAlert controllerAlert = new ControllerAlert();
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
-
-        controllerAlert.SendAlertInfo(BreachType.TOO_LOW);
-        
+        controllerAlert.SendAlertInfo(BreachType.TOO_LOW);        
         String expectedOutput = "65261 : temperature Too Low\n";
         assertEquals(expectedOutput, out.toString());
-
         System.setOut(System.out);
     }
 }
